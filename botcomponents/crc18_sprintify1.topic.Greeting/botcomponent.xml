@@ -1,0 +1,11 @@
+<botcomponent schemaname="crc18_sprintify1.topic.Greeting">
+  <componenttype>9</componenttype>
+  <description>Este tema se desencadena cuando el usuario saluda al agente.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Saludo</name>
+  <parentbotid>
+    <schemaname>crc18_sprintify1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

@@ -1,0 +1,10 @@
+<botcomponent schemaname="crc18_sprintify1.topic.DiseodevideojuegoHistoriasdeusuario">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>Diseño de videojuego – Historias de usuario</name>
+  <parentbotid>
+    <schemaname>crc18_sprintify1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

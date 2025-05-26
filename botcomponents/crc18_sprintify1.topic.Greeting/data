@@ -1,0 +1,25 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Saludo
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - Buenas tardes
+      - Buenos días
+      - Hola
+      - ¿Qué tal?
+      - Hola.
+
+  actions:
+    - kind: SendActivity
+      id: sendMessage_abmysR
+      activity:
+        text:
+          - Hola soy Sprintify, sientase comodo de empezar a generar historias de usuario para su juego escribiendo frases como "quiero crear un videojuego", "quiero que me brindes historias de usuario para un videojuego"
+        speak:
+          - Hola, soy <break strength="medium" />. ¿En qué puedo ayudarle?
+
+    - kind: CancelAllDialogs
+      id: cancelAllDialogs_01At22

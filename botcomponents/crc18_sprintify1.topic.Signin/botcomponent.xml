@@ -1,0 +1,11 @@
+<botcomponent schemaname="crc18_sprintify1.topic.Signin">
+  <componenttype>9</componenttype>
+  <description>Este tema del sistema se desencadena cuando el agente necesita iniciar sesión en el usuario o pedir al usuario que inicie sesión</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Iniciar sesión </name>
+  <parentbotid>
+    <schemaname>crc18_sprintify1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

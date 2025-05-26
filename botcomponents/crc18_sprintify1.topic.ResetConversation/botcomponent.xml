@@ -1,0 +1,10 @@
+<botcomponent schemaname="crc18_sprintify1.topic.ResetConversation">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>Restablecer conversación</name>
+  <parentbotid>
+    <schemaname>crc18_sprintify1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

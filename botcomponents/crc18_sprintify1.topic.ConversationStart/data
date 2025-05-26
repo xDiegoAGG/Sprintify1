@@ -1,0 +1,12 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnConversationStart
+  id: main
+  actions:
+    - kind: SendActivity
+      id: sendMessage_M0LuhV
+      activity:
+        text:
+          - Hola, soy {System.Bot.Name}, un asistente virtual creado para ayudarlo en la planeación del desarrollo de videojuegos. Para su información, utilizo IA para la generación de historias de usuario que sirvan de base para la construcción de un videojuego.
+        speak:
+          - Hola y gracias por llamar a {System.Bot.Name}. Tenga en cuenta que algunas respuestas se generan mediante IA y puede ser necesario comprobar su precisión. ¿En qué puedo ayudarle?

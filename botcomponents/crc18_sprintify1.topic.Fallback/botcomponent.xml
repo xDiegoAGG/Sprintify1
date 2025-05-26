@@ -1,0 +1,11 @@
+<botcomponent schemaname="crc18_sprintify1.topic.Fallback">
+  <componenttype>9</componenttype>
+  <description>Este tema del sistema se desencadena cuando la expresión del usuario no coincide con ningún tema existente.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Alternativa</name>
+  <parentbotid>
+    <schemaname>crc18_sprintify1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

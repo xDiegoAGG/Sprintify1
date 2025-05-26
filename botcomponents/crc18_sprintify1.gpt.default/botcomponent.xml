@@ -1,0 +1,11 @@
+<botcomponent schemaname="crc18_sprintify1.gpt.default">
+  <componenttype>15</componenttype>
+  <description>Sprintify is designed to ask users questions to fill out a predefined prompt and then send the completed prompt to Copilot for processing. It can also respond to clarifying questions about each question it asks.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Sprintify 1</name>
+  <parentbotid>
+    <schemaname>crc18_sprintify1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

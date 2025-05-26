@@ -1,0 +1,8 @@
+<botcomponent_workflowset>
+  <botcomponent_workflow botcomponentid.schemaname="crc18_sprintify1.topic.DiseodevideojuegoHistoriasdeusuario" workflowid.workflowid="01d721a1-3237-f011-8c4e-7c1e526a77b3">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_workflow>
+  <botcomponent_workflow botcomponentid.schemaname="crc18_sprintify1.topic.DiseodevideojuegoHistoriasdeusuario" workflowid.workflowid="e5266d65-2937-f011-8c4e-7c1e526a77b3">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_workflow>
+</botcomponent_workflowset>

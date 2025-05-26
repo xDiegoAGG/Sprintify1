@@ -1,0 +1,146 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_github": {
+        "api": {
+          "name": "shared_github"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedgithub_8834a"
+        },
+        "runtimeSource": "invoker"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "description": "Dueño repositorio",
+                  "title": "githubUsuario",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "text_2": {
+                  "description": "Repositorio",
+                  "title": "repoGuardar",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "text_1": {
+                  "description": "Historias de usuario",
+                  "title": "userStories",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "text",
+                "text_2",
+                "text_1"
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "b8f61c18-7224-4f8a-9c5f-72fbce5df764"
+          }
+        }
+      },
+      "actions": {
+        "Redactar": {
+          "type": "Compose",
+          "inputs": "@substring(\r\n  triggerBody()?['text_1'],\r\n  indexOf(triggerBody()?['text_1'], '1. **Título:'),\r\n  sub(\r\n    indexOf(triggerBody()?['text_1'], '### Juegos Similares'),\r\n    indexOf(triggerBody()?['text_1'], '1. **Título:')\r\n  )\r\n)\r\n",
+          "runAfter": {}
+        },
+        "Redactar_1": {
+          "type": "Compose",
+          "inputs": "@skip(split(outputs('Redactar'), '**Título:'), 1)\r\n",
+          "runAfter": {
+            "Redactar": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Aplicar_a_cada_uno": {
+          "type": "Foreach",
+          "foreach": "@outputs('Redactar_1')",
+          "actions": {
+            "Crear_un_problema": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "repositoryOwner": "@triggerBody()?['text']",
+                  "repositoryName": "@triggerBody()?['text_2']",
+                  "issueBasicDetails/title": "@if(contains(item(), '**'), trim(split(item(), '**')[0]), 'Título no válido')\r\n",
+                  "issueBasicDetails/body": "@replace(\r\n  replace(\r\n    replace(\r\n      if(\r\n        contains(item(), '- **Historia**:'),\r\n        substring(\r\n          item(),\r\n          indexOf(item(), '- **Historia**:'),\r\n          min(sub(length(item()), indexOf(item(), '- **Historia**:')), 5000)\r\n        ),\r\n        'Contenido no válido'\r\n      ),\r\n      '- **Criterios de Aceptación**:', '**Criterios de Aceptación:**'\r\n    ),\r\n    '- **Tareas**:', '**Tareas:**'\r\n  ),\r\n  '- **Estimación**:', '**Estimación:**'\r\n)\r\n"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_github",
+                  "operationId": "CreateIssue",
+                  "connectionName": "shared_github"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Redactar_1": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Responder_al_agente": {
+          "type": "Response",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mensajeconfirmacion": {
+                  "title": "mensajeConfirmacion",
+                  "description": "",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "additionalProperties": {}
+            },
+            "statusCode": 200,
+            "body": {
+              "mensajeconfirmacion": "Todos los issues han sido subidos al repositorio @{triggerBody()?['text_2']} correctamente"
+            }
+          },
+          "runAfter": {
+            "Aplicar_a_cada_uno": [
+              "Succeeded"
+            ]
+          }
+        }
+      },
+      "outputs": {},
+      "description": "When an agent calls the flow and send back a response."
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

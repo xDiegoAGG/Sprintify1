@@ -1,0 +1,11 @@
+<botcomponent schemaname="crc18_sprintify1.topic.Search">
+  <componenttype>9</componenttype>
+  <description>Cree respuestas generativas a partir de orígenes de conocimiento.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Potenciar conversaciones</name>
+  <parentbotid>
+    <schemaname>crc18_sprintify1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

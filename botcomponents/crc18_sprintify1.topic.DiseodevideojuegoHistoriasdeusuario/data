@@ -1,0 +1,216 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    triggerQueries:
+      - diseño de videojuego
+      - historias de usuario
+      - crear historias de usuario para videojuegos
+      - cómo diseñar un videojuego
+      - ejemplos de historias de usuario en videojuegos
+      - guía para diseño de videojuegos
+      - estructura narrativa en videojuegos
+      - tips para escribir historias de usuario en juegos
+
+  actions:
+    - kind: Question
+      id: Question_pML11r
+      variable: Topic.genero
+      prompt: _¿Cuál es el género del videojuego que quieres crear?_
+      entity: StringPrebuiltEntity
+
+    - kind: Question
+      id: Question_y0CvhN
+      variable: Topic.audiencia_objetivo
+      prompt: _¡Genial que quieras crear un juego! ¿A quién te gustaría que esté dirigido principalmente?_
+      entity: StringPrebuiltEntity
+
+    - kind: Question
+      id: Question_oWdom4
+      alwaysPrompt: true
+      variable: Topic.plataformas
+      prompt: _¿Te gustaría que tu juego se pueda jugar en PC, consola, móvil... o en todas?_
+      entity: StringPrebuiltEntity
+
+    - kind: Question
+      id: Question_UmvUJi
+      variable: Topic.inspiracion
+      prompt: _🎮 ¿Y qué juegos te inspiran para la historia?_
+      entity: StringPrebuiltEntity
+
+    - kind: Question
+      id: Question_548sBq
+      variable: Topic.limitaciones
+      prompt: ¿Cuáles son las limitaciones importantes?
+      entity: StringPrebuiltEntity
+
+    - kind: Question
+      id: question_ERI3wG
+      interruptionPolicy:
+        allowInterruption: true
+
+      alwaysPrompt: true
+      variable: init:Topic.decision_perfil
+      prompt: ¿Quieres inspirarte en algún perfil de usuario?
+      entity:
+        kind: EmbeddedEntity
+        definition:
+          kind: ClosedListEntity
+          items:
+            - id: Si
+              displayName: Si
+
+            - id: No
+              displayName: No
+
+    - kind: ConditionGroup
+      id: conditionGroup_YIvJoT
+      conditions:
+        - id: conditionItem_dRggjv
+          condition: =Topic.decision_perfil = 'crc18_sprintify1.topic.DiseodevideojuegoHistoriasdeusuario.main.question_ERI3wG'.Si
+          displayName: quiere_perfil
+          actions:
+            - kind: Question
+              id: question_9eUHfL
+              interruptionPolicy:
+                allowInterruption: true
+
+              variable: init:Topic.perfil
+              prompt: "Describe el perfil o los perfiles de usuario a los cuáles va orientado tu juego:"
+              entity: StringPrebuiltEntity
+
+            - kind: InvokeAIBuilderModelAction
+              id: invokeAIBuilderModelAction_oUKL0m
+              input:
+                binding:
+                  audiencia_objetivo: =Topic.audiencia_objetivo
+                  genero: =Topic.genero
+                  inspiracion: =Topic.inspiracion
+                  limitaciones: =Topic.limitaciones
+                  perfil: =Topic.perfil
+                  plataformas: =Topic.plataformas
+
+              output:
+                binding:
+                  predictionOutput: Topic.resultado1
+
+              aIModelId: a6582ae6-841e-43ba-ba71-eb389d808d1d
+
+            - kind: SendActivity
+              id: sendActivity_n1AEOR
+              activity: "{Topic.resultado1.text}"
+
+      elseActions:
+        - kind: InvokeAIBuilderModelAction
+          id: invokeAIBuilderModelAction_mUDY5P
+          input:
+            binding:
+              audiencia_objetivo: =Topic.audiencia_objetivo
+              genero: =Topic.genero
+              inspiracion: =Topic.inspiracion
+              limitaciones: =Topic.limitaciones
+              plataformas: =Topic.plataformas
+
+          output:
+            binding:
+              predictionOutput: Topic.resultado2
+
+          aIModelId: 8110d97d-0395-454e-83a8-cfa6577fa1a5
+
+        - kind: SendActivity
+          id: sendActivity_1jzM4L
+          activity: "{Topic.resultado2.text}"
+
+    - kind: SetVariable
+      id: setVariable_zOOdHl
+      variable: Topic.userStories
+      value: |-
+        =If(
+            !IsBlank(Topic.resultado1.text),
+            Topic.resultado1.text,
+            Topic.resultado2.text
+        )
+
+    - kind: SendActivity
+      id: sendActivity_MtnSqF
+      activity: Ahora vamos a almacenar tus historias de usuario en un repositorio. **(Recuerda que debes tener el repositorio previamente creado)**
+
+    - kind: Question
+      id: question_ni3qib
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Topic.githubUsuario
+      prompt: ¿Cuál es tu nombre de usuario en Github? **Por favor escribe tu usuario igual que en GitHub respetando mayúsculas y minúsculas.**
+      entity:
+        kind: StringPrebuiltEntity
+        sensitivityLevel: None
+
+    - kind: SendActivity
+      id: sendActivity_RH7OYp
+      activity: Voy a recopilar tus repositorios.
+
+    - kind: InvokeFlowAction
+      id: invokeFlowAction_ikkfUT
+      input:
+        binding:
+          text: =Topic.githubUsuario
+
+      output:
+        binding:
+          listofrepos: Topic.listOfRepos
+
+      flowId: e5266d65-2937-f011-8c4e-7c1e526a77b3
+
+    - kind: ParseValue
+      id: joweur
+      variable: Topic.repositorios
+      valueType:
+        kind: Table
+        properties:
+          DisplayName: String
+
+      value: =Topic.listOfRepos
+
+    - kind: Question
+      id: question_QWad7E
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: init:Topic.repoGuardar
+      prompt: Por favor selecciona el repositorio donde desear guardar las historias de usuario
+      entity:
+        kind: DynamicClosedListEntity
+        items: =Topic.repositorios
+
+    - kind: SendActivity
+      id: sendActivity_Y2UqRE
+      activity: Perfecto, vamos a subir las historias de usuario como issues en {Topic.repoGuardar.DisplayName}
+
+    - kind: InvokeFlowAction
+      id: invokeFlowAction_Vcffwy
+      input:
+        binding:
+          text: =Topic.githubUsuario
+          text_1: =Topic.userStories
+          text_2: =Topic.repoGuardar.DisplayName
+
+      output:
+        binding:
+          mensajeconfirmacion: Topic.mensajeConfirmacion
+
+      flowId: 01d721a1-3237-f011-8c4e-7c1e526a77b3
+
+    - kind: SendActivity
+      id: sendActivity_SEDVnC
+      activity:
+        text:
+          - "{Topic.mensajeConfirmacion}"
+          - Buena Suerte con el desarrollo de tu videojuego
+
+    - kind: EndDialog
+      id: 6Xw0lZ
+
+inputType: {}
+outputType: {}

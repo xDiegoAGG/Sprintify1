@@ -1,0 +1,8 @@
+<botcomponent_msdyn_aimodelset>
+  <botcomponent_msdyn_aimodel botcomponentid.schemaname="crc18_sprintify1.topic.DiseodevideojuegoHistoriasdeusuario" msdyn_aimodelid.msdyn_aimodelid="8110d97d-0395-454e-83a8-cfa6577fa1a5">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_msdyn_aimodel>
+  <botcomponent_msdyn_aimodel botcomponentid.schemaname="crc18_sprintify1.topic.DiseodevideojuegoHistoriasdeusuario" msdyn_aimodelid.msdyn_aimodelid="a6582ae6-841e-43ba-ba71-eb389d808d1d">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_msdyn_aimodel>
+</botcomponent_msdyn_aimodelset>

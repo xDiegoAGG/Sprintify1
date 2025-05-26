@@ -1,0 +1,11 @@
+<botcomponent schemaname="crc18_sprintify1.topic.MultipleTopicsMatched">
+  <componenttype>9</componenttype>
+  <description>Este tema del sistema se desencadena cuando el agente encuentra varios temas coincidentes con el mensaje entrante y necesita aclarar qué tema se debe desencadenar.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Varios temas relacionados</name>
+  <parentbotid>
+    <schemaname>crc18_sprintify1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>
