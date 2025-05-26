@@ -1,0 +1,85 @@
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.25042.234" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.25043.00216">
+  <Entities></Entities>
+  <Roles></Roles>
+  <Workflows>
+    <Workflow WorkflowId="{e5266d65-2937-f011-8c4e-7c1e526a77b3}" Name="listarRepositorios" Description="Este flujo se activa manualmente cuando se introduce un nombre de usuario de GitHub. Luego, realiza una solicitud HTTP para obtener los repositorios del usuario. Los datos JSON recibidos se analizan y se seleccionan los nombres de los repositorios. Finalmente, se responde con una lista de nombres de repositorios.">
+      <JsonFileName>/Workflows/listarRepositorios-E5266D65-2937-F011-8C4E-7C1E526A77B3.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <BusinessProcessType>0</BusinessProcessType>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <ModernFlowType>1</ModernFlowType>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="3082" description="listarRepositorios" />
+      </LocalizedNames>
+      <Descriptions>
+        <Description languagecode="3082" description="Este flujo se activa manualmente cuando se introduce un nombre de usuario de GitHub. Luego, realiza una solicitud HTTP para obtener los repositorios del usuario. Los datos JSON recibidos se analizan y se seleccionan los nombres de los repositorios. Finalmente, se responde con una lista de nombres de repositorios." />
+      </Descriptions>
+    </Workflow>
+    <Workflow WorkflowId="{01d721a1-3237-f011-8c4e-7c1e526a77b3}" Name="subirIssues" Description="When an agent calls the flow and send back a response.">
+      <JsonFileName>/Workflows/subirIssues-01D721A1-3237-F011-8C4E-7C1E526A77B3.json</JsonFileName>
+      <Type>1</Type>
+      <Subprocess>0</Subprocess>
+      <Category>5</Category>
+      <Mode>0</Mode>
+      <Scope>4</Scope>
+      <OnDemand>0</OnDemand>
+      <TriggerOnCreate>0</TriggerOnCreate>
+      <TriggerOnDelete>0</TriggerOnDelete>
+      <AsyncAutodelete>0</AsyncAutodelete>
+      <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+      <StateCode>1</StateCode>
+      <StatusCode>2</StatusCode>
+      <RunAs>1</RunAs>
+      <IsTransacted>1</IsTransacted>
+      <IntroducedVersion>1.0</IntroducedVersion>
+      <IsCustomizable>1</IsCustomizable>
+      <BusinessProcessType>0</BusinessProcessType>
+      <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+      <ModernFlowType>1</ModernFlowType>
+      <PrimaryEntity>none</PrimaryEntity>
+      <LocalizedNames>
+        <LocalizedName languagecode="3082" description="subirIssues" />
+      </LocalizedNames>
+      <Descriptions>
+        <Description languagecode="3082" description="When an agent calls the flow and send back a response." />
+      </Descriptions>
+    </Workflow>
+  </Workflows>
+  <FieldSecurityProfiles></FieldSecurityProfiles>
+  <Templates />
+  <EntityMaps />
+  <EntityRelationships />
+  <OrganizationSettings />
+  <optionsets />
+  <CustomControls />
+  <EntityDataProviders />
+  <connectionreferences>
+    <connectionreference connectionreferencelogicalname="new_sharedgithub_8834a">
+      <connectionreferencedisplayname>GitHub</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_github</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+  </connectionreferences>
+  <Languages>
+    <Language>3082</Language>
+  </Languages>
+</ImportExportXml>
